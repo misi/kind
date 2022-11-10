@@ -1,0 +1,4 @@
+resources:
+- whoami.yaml
+- gateway.yaml
+- httproute.yaml

@@ -1,0 +1,40 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: sandbox
+nodes:
+  # one node hosting a control plane
+  - role: control-plane
+  - role: worker
+    labels:
+      ingress: true
+    # port forward on the host to port on this node
+    extraPortMappings:
+    # http v1/v2
+    - containerPort: 30080
+      hostPort: 80
+      # optional: set the bind address on the host
+      # 0.0.0.0 is the current default
+      listenAddress: "127.0.0.1"
+      # optional: set the protocol to one of TCP, UDP, SCTP.
+      # TCP is the default
+      protocol: TCP
+    # https v1/v2
+    - containerPort: 30443
+      hostPort: 443
+      # optional: set the bind address on the host
+      # 0.0.0.0 is the current default
+      listenAddress: "127.0.0.1"
+      # optional: set the protocol to one of TCP, UDP, SCTP.
+      # TCP is the default
+      protocol: TCP
+    # http v3
+    - containerPort: 30443
+      hostPort: 443
+      # optional: set the bind address on the host
+      # 0.0.0.0 is the current default
+      listenAddress: "127.0.0.1"
+      # optional: set the protocol to one of TCP, UDP, SCTP.
+      # TCP is the default
+      protocol: UDP
+  - role: worker
+  - role: worker

@@ -1,0 +1,56 @@
+experimental:
+  plugins:
+    enabled: true
+  kubernetesGateway:
+    enabled: true
+    gateway:
+      enabled: true
+service:
+  enabled: true
+  single: true
+  type: NodePort
+ports:
+  metrics:
+    expose: false
+    exposedPort: 9100
+    port: 9100
+    protocol: TCP
+  traefik:
+    expose: false
+    exposedPort: 9000
+    port: 9000
+    protocol: TCP
+  web:
+    expose: true
+    exposedPort: 80
+    nodePort: 30080
+    port: 8000
+    protocol: TCP
+  websecure:
+    expose: true
+    exposedPort: 443
+    nodePort: 30443
+    http3:
+      enabled: true
+    middlewares: []
+    port: 8443
+    protocol: TCP
+    tls:
+      certResolver: ""
+      domains: []
+      enabled: true
+      options: ""
+nodeSelector:
+  ingress: "true"
+logs:
+  access:
+    enabled: true
+    fields:
+      general:
+        defaultmode: keep
+      headers:
+        defaultmode: keep
+  general:
+    level: DEBUG
+tracing:
+  jaeger: {}
