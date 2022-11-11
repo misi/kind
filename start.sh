@@ -1,5 +1,9 @@
 #!/bin/bash
 kind create cluster --name sandbox --config sandbox-cluster.yaml
+
+#use worker3 ingress only
+kubectl taint nodes sandbox-worker3 node-role.kubernetes.io/ingress="":NoSchedule
+
 # GW API crd-s
 git clone --depth 1 --branch "v0.4.0" https://github.com/kubernetes-sigs/gateway-api.git
 cd gateway-api

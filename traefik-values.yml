@@ -54,3 +54,6 @@ logs:
     level: DEBUG
 tracing:
   jaeger: {}
+tolerations:
+  - key: node-role.kubernetes.io/ingress
+    effect: NoSchedule
